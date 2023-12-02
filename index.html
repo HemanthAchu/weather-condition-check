@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="main">
+        <div class="main1">
+            <div class="went">
+<h2>WEATHER</h2>
+
+<img src="https://imgs.search.brave.com/VQWG-X_52M66kGaza580P0s-aAVtE63aiafj1lqUIiE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMy9XZWF0/aGVyLVBORy1QaWN0/dXJlLnBuZw" alt="">
+<div class="box" id="box">
+   
+</div>
+
+
+            </div>
+            <div class="went1" id="went1">
+                <input class="input" id ="result" type="text" placeholder="&nbsp; plese Enter place Name">
+                
+                <hr>
+                <button class="search" onclick="wether()"><i class="fa-solid fa-magnifying-glass fo"></i></button>
+                <div class="went11" id="went11"></div>
+            
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+
+
+
+
+
+const wether =async ()=>{
+    
+ const answer=result.value
+console.log(answer);
+   
+    const Wetherdetails = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${answer}&appid=8ac5c4d57ba6a4b3dfcf622700447b1e&units=metric`)
+    console.log(Wetherdetails);
+    const mains = await Wetherdetails.json()
+    console.log(mains.main.temp);
+    const date = new Date()
+   
+    went11.innerHTML =`
+    
+    
+    
+
+            <hr>
+            
+                <h3 class="sp">Wether Details</h3>
+            <h4 class="sp col" >Country</h4>
+            <p class="sp">${mains.sys.country}</p>
+            <h4 class="sp col" >humidity</h4>
+            <p class="sp">${mains.main.humidity}%</p>
+            <h4 class="sp col">wind</h4>
+            <p class="sp">${mains.wind.speed}kmph</p>
+            <h4 class="sp col">pressure</h4>
+            <p class="sp">${mains.main.pressure}</p>
+               
+    
+    
+    `
+    box.innerHTML=`
+    <p class="font">${mains.main.temp}</p>
+    <p>feels like ${mains.main.feels_like}</p>
+    <h3>${mains.name}</h3>
+    <p>${date}</p>
+    `
+    
+}
+wether()
+
+
+
+
+</script>
+</html>
